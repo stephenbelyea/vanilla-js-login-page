@@ -10,14 +10,15 @@
     <main>
       <div class="container">
         <h1>Login</h1>
+        <div id="error" role="alert"></div>
         <form id="login">
           <div class="field">
             <label for="username">Username</label>
-            <input type="text" id="username" required>
+            <input type="text" id="username">
           </div>
           <div class="field">
             <label for="password">Password</label>
-            <input type="text" id="password" required>
+            <input type="password" id="password">
           </div>
           <div class="field submit">
             <button type="submit">Login</button>
@@ -25,5 +26,54 @@
         </form>
       </div>
     </main>
+    <script>
+      function getFormValues() {
+        return {
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value
+        };
+      }
+
+      function validateFormValues() {
+        const { username, password } = getFormValues();
+
+        if (!username || !password) {
+          return 'Enter a username and password.';
+        }
+
+        if (username !== 'level' || password !== 'Access123') {
+          return 'Username and password do not match.';
+        }
+
+        return null;
+      }
+
+      function setFormError(formError) {
+        const errorContainer = document.getElementById('error');
+
+        if (!formError) {
+          errorContainer.innerHTML = '';
+          return;
+        }
+
+        errorContainer.innerHTML = '<p class="error">' + formError + '</p>';
+      }
+
+      function onSubmitLogin(event) {
+        event.preventDefault();
+        const formError = validateFormValues();
+
+        if (formError !== null) {
+          setFormError(formError);
+          return;
+        }
+
+        setFormError();
+        console.log('Success!')
+        return;
+      }
+
+      document.getElementById('login').onsubmit = onSubmitLogin;
+    </script>
   </body>
 </html>
