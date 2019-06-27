@@ -34,6 +34,11 @@
         };
       }
 
+      function resetFormValues() {
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+      }
+
       function validateFormValues() {
         const { username, password } = getFormValues();
 
@@ -56,7 +61,7 @@
           return;
         }
 
-        errorContainer.innerHTML = '<p class="error">' + formError + '</p>';
+        errorContainer.innerHTML = '<p>' + formError + '</p>';
       }
 
       function onSubmitLogin(event) {
@@ -69,8 +74,8 @@
         }
 
         setFormError();
-        console.log('Success!')
-        return;
+        resetFormValues();
+        window.alert('Login was successful!');
       }
 
       document.getElementById('login').onsubmit = onSubmitLogin;
