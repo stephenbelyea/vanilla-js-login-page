@@ -39,11 +39,23 @@
         document.getElementById('password').value = '';
       }
 
+      function validatePasswordRules(password) {
+        return (
+          password.match(/[A-Z]/) &&
+          password.match(/[a-z]/) &&
+          password.match(/\d/)
+        );
+      }
+
       function validateFormValues() {
         const { username, password } = getFormValues();
 
         if (!username || !password) {
           return 'Enter a username and password.';
+        }
+
+        if (!validatePasswordRules(password)) {
+          return 'Password must include at least on capital letter, one lower case, and one number.';
         }
 
         if (username !== 'level' || password !== 'Access123') {
