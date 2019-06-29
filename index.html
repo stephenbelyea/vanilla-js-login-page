@@ -14,11 +14,11 @@
         <form id="login">
           <div class="field">
             <label for="username">Username</label>
-            <input type="text" id="username">
+            <input type="text" id="username" required>
           </div>
           <div class="field">
             <label for="password">Password</label>
-            <input type="password" id="password">
+            <input type="password" id="password" required>
           </div>
           <div class="field submit">
             <button type="submit">Login</button>
@@ -32,11 +32,6 @@
           username: document.getElementById('username').value,
           password: document.getElementById('password').value
         };
-      }
-
-      function resetFormValues() {
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
       }
 
       function validatePasswordRules(password) {
@@ -85,9 +80,8 @@
           return;
         }
 
-        setFormError();
-        resetFormValues();
         window.alert('Login was successful!');
+        window.location.href = './auth.html';
       }
 
       document.getElementById('login').onsubmit = onSubmitLogin;
